@@ -65,7 +65,7 @@ export default function AboutPage() {
       <Navbar />
 
       {/* ═══ HERO ═══ */}
-      <section className="section section--sand" id="about-hero" style={{ overflow: "hidden" }}>
+      <section className="section section--sand section--first" id="about-hero" style={{ overflow: "hidden" }}>
         <div className="container hero">
           <motion.div
             className="hero-text"

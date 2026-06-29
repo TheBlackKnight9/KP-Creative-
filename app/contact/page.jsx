@@ -59,7 +59,7 @@ export default function ContactPage() {
       <Navbar />
 
       {/* ═══ HERO ═══ */}
-      <section className="section section--sand" id="contact-hero" style={{ overflow: "hidden" }}>
+      <section className="section section--sand section--first" id="contact-hero" style={{ overflow: "hidden" }}>
         <div className="container hero">
           <motion.div
             className="hero-text"

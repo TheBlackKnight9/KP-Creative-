@@ -198,6 +198,11 @@ ul, ol {
   padding-block: var(--section-pad);
 }
 
+/* First section directly after nav — strip top padding to minimal gap */
+.section--first {
+  padding-top: 1.5rem;
+}
+
 .section--sand {
   background-color: var(--sand);
 }
@@ -1121,7 +1126,7 @@ ul, ol {
 
 /* ── Spacer for fixed nav ───────────────────────────────── */
 .nav-spacer {
-  height: 80px;
+  height: 60px;
 }
 
 /* ── 404 Page ───────────────────────────────────────────── */
