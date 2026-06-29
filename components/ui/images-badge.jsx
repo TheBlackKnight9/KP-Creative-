@@ -15,6 +15,14 @@ export function ImagesBadge({
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Swap center and right image so the right-side image becomes the main (center) image
+  const reorderedImages = [...images];
+  if (reorderedImages.length >= 3) {
+    const temp = reorderedImages[1];
+    reorderedImages[1] = reorderedImages[2];
+    reorderedImages[2] = temp;
+  }
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -26,7 +34,7 @@ export function ImagesBadge({
         className="relative flex items-center justify-center bg-[#1C0F0A]/5 rounded-lg overflow-visible shrink-0"
         style={{ width: folderSize.width, height: folderSize.height }}
       >
-        {images.map((img, idx) => {
+        {reorderedImages.map((img, idx) => {
           // Horizontal spread offset on hover
           let xOffset = 0;
           if (isHovered) {
@@ -46,8 +54,8 @@ export function ImagesBadge({
             rotateAngle = (idx - 1) * 4;
           }
 
-          // Z-index calculation to overlay right image on top as the main photo
-          const zIndex = idx === 2 ? 20 : (idx === 1 ? 10 : 5);
+          // Z-index calculation to overlay center image on top in teaser, but right image on top in spread (or vice versa)
+          const zIndex = isHovered ? (idx === 1 ? 20 : 10) : (idx === 1 ? 10 : 5);
 
           return (
             <motion.div
