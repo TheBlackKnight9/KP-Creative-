@@ -208,6 +208,26 @@ const fadeInUp = {
 
 function ModelCard({ model }) {
   const [hovered, setHovered] = useState(false);
+  const isFeatured = model.featured;
+  
+  const bgClass = isFeatured 
+    ? "bg-[#C4501A] border-[#C4501A] md:scale-[1.03]" 
+    : "bg-[#FAF5F2] border-[#D9C8BF] hover:border-[#C4501A]";
+  
+  const shadowClass = isFeatured
+    ? (hovered ? "shadow-[0_30px_60px_rgba(196,80,26,0.3)] -translate-y-2" : "shadow-[0_30px_60px_rgba(196,80,26,0.18)]")
+    : (hovered ? "shadow-[0_30px_60px_rgba(28,15,10,0.15)] -translate-y-2 border-[#C4501A]" : "shadow-[0_2px_16px_rgba(28,15,10,0.06)]");
+
+  const titleColor = isFeatured ? "text-white" : "text-[#1C0F0A]";
+  const descColor = isFeatured ? "text-white/80" : "text-[#1C0F0A]/60";
+  const listTextColor = isFeatured ? "text-white" : "text-[#1C0F0A]";
+  const badgeClass = isFeatured ? "text-[#C4501A] bg-white" : "text-white bg-[#C4501A]";
+  const iconColorClass = isFeatured ? "text-white" : "text-[#C4501A]";
+  const dividerClass = isFeatured ? "bg-white/20" : "bg-[#D9C8BF]";
+  
+  const buttonClass = isFeatured
+    ? "bg-white text-[#C4501A] hover:bg-white/95 border-white py-3 rounded-full font-semibold shadow-sm w-full flex items-center justify-center gap-2"
+    : "btn w-full flex items-center justify-center gap-2 btn-secondary";
 
   return (
     <motion.div
@@ -225,13 +245,7 @@ function ModelCard({ model }) {
           }
         }
       }}
-      className={`relative rounded-[24px] border p-8 flex flex-col h-full justify-between transition-all duration-500 ease-in-out cursor-pointer
-        ${model.featured 
-          ? "border-[#C4501A] bg-[#F5EDE8] shadow-[0_30px_60px_rgba(28,15,10,0.12)] md:scale-[1.03]" 
-          : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] hover:border-[#C4501A]"
-        }
-        ${hovered ? "shadow-[0_30px_60px_rgba(28,15,10,0.15)] -translate-y-2 border-[#C4501A]" : ""}
-      `}
+      className={`relative rounded-[24px] border p-8 flex flex-col h-full justify-between transition-all duration-500 ease-in-out cursor-pointer ${bgClass} ${shadowClass}`}
       style={{
         transition: "border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
       }}
@@ -239,19 +253,19 @@ function ModelCard({ model }) {
       <div className="flex flex-col items-start w-full">
         {/* Badge */}
         {model.badge && (
-          <span className="text-[10px] font-bold tracking-wider uppercase text-white bg-[#C4501A] px-3 py-1 rounded-full mb-4 inline-block shadow-sm">
+          <span className={`text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full mb-4 inline-block shadow-sm ${badgeClass}`}>
             {model.badge}
           </span>
         )}
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl font-bold text-[#1C0F0A] tracking-tight mb-3">
+        <h3 className={`text-xl md:text-2xl font-bold tracking-tight mb-3 ${titleColor}`}>
           {model.title}
         </h3>
 
         {/* Illustration */}
         {model.image && (
-          <div className="w-full flex items-center justify-center py-4 mb-4 bg-[#1C0F0A]/[0.02] rounded-[16px] overflow-hidden">
+          <div className={`w-full flex items-center justify-center py-4 mb-4 rounded-[16px] overflow-hidden ${isFeatured ? "bg-white/10" : "bg-[#1C0F0A]/[0.02]"}`}>
             <img
               src={model.image}
               alt={model.title}
@@ -261,12 +275,12 @@ function ModelCard({ model }) {
         )}
 
         {/* Description */}
-        <p className="text-sm text-[#1C0F0A]/60 leading-relaxed mb-6">
+        <p className={`text-sm leading-relaxed mb-6 ${descColor}`}>
           {model.desc}
         </p>
 
         {/* Divider */}
-        <div className="w-full h-[1px] bg-[#D9C8BF] mb-6" />
+        <div className={`w-full h-[1px] mb-6 ${dividerClass}`} />
 
         {/* Features List */}
         <ul className="list-none p-0 m-0 flex flex-col gap-3 w-full mb-8">
@@ -282,9 +296,9 @@ function ModelCard({ model }) {
                 duration: 0.5,
                 ease: [0.22, 1, 0.36, 1]
               }}
-              className="flex items-center gap-3 text-sm font-semibold text-[#1C0F0A]"
+              className={`flex items-center gap-3 text-sm font-semibold ${listTextColor}`}
             >
-              <CheckCircle size={16} className="text-[#C4501A] shrink-0" />
+              <CheckCircle size={16} className={`shrink-0 ${iconColorClass}`} />
               <span>{f}</span>
             </motion.li>
           ))}
@@ -292,10 +306,7 @@ function ModelCard({ model }) {
       </div>
 
       {/* Button */}
-      <Link
-        href="/contact"
-        className={`btn w-full flex items-center justify-center gap-2 ${model.featured ? "btn-primary" : "btn-secondary"}`}
-      >
+      <Link href="/contact" className={buttonClass}>
         <span>{model.buttonText}</span>
         <motion.span
           animate={{ x: hovered ? 4 : 0 }}
