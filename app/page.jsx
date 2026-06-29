@@ -30,6 +30,7 @@ import LogoMarquee from "@/components/LogoMarquee";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CreativeHeading from "@/components/CreativeHeading";
+import { ImagesBadge } from "@/components/ui/images-badge";
 
 const SERVICES = [
   {
@@ -758,21 +759,54 @@ export default function HomePage() {
           </div>
 
           <motion.div
-            className="grid-3"
+            className="flex flex-wrap justify-center gap-y-12 gap-x-6 mt-12 w-full"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {WHY_US.map((item) => (
-              <motion.div key={item.title} variants={fadeInUp}>
-                <ClayCard>
-                  <div className="service-icon"><item.icon /></div>
-                  <h3 className="text-h3" style={{ marginBottom: "0.5rem" }}>{item.title}</h3>
-                  <p className="text-body">{item.desc}</p>
-                </ClayCard>
-              </motion.div>
-            ))}
+            {WHY_US.map((item, idx) => {
+              // Assign distinct clay graphic image stacks for each badge
+              let badgeImages = [];
+              if (idx === 0) {
+                badgeImages = ["/images/clay-web-design.png", "/images/clay-graphic-design.png", "/images/clay-picture-frames.png"];
+              } else if (idx === 1) {
+                badgeImages = ["/images/clay-magnifying-glass.png", "/images/clay-shapes-stacked.png", "/images/clay-digital-transformation.png"];
+              } else if (idx === 2) {
+                badgeImages = ["/images/clay-mouse-solid.png", "/images/clay-browser-laptop-solid.png", "/images/clay-toolbox.png"];
+              } else if (idx === 3) {
+                badgeImages = ["/images/clay-phone-envelope.png", "/images/clay-picture-frames.png", "/images/clay-social-media.png"];
+              } else if (idx === 4) {
+                badgeImages = ["/images/clay-web-design.png", "/images/clay-browser-laptop.png", "/images/clay-digital-transformation.png"];
+              } else {
+                badgeImages = ["/images/clay-toolbox.png", "/images/clay-shapes-stacked.png", "/images/clay-crumpled-paper.png"];
+              }
+
+              return (
+                <motion.div 
+                  key={item.title} 
+                  variants={fadeInUp}
+                  className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] flex justify-center py-2"
+                >
+                  <div className="flex flex-col items-center text-center w-full max-w-[290px]">
+                    <div className="h-16 flex items-center justify-center relative overflow-visible">
+                      <ImagesBadge
+                        text={item.title}
+                        images={badgeImages}
+                        folderSize={{ width: 52, height: 38 }}
+                        teaserImageSize={{ width: 44, height: 30 }}
+                        hoverImageSize={{ width: 130, height: 100 }}
+                        hoverTranslateY={-95}
+                        hoverSpread={45}
+                      />
+                    </div>
+                    <p className="text-xs md:text-sm leading-relaxed text-[#1C0F0A]/60 mt-4 px-4">
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
