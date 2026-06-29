@@ -46,8 +46,8 @@ export function ImagesBadge({
             rotateAngle = (idx - 1) * 4;
           }
 
-          // Z-index calculation to overlay center image on top in teaser, but right image on top in spread (or vice versa)
-          const zIndex = isHovered ? (idx === 1 ? 20 : 10) : (idx === 1 ? 10 : 5);
+          // Z-index calculation to overlay right image on top as the main photo
+          const zIndex = idx === 2 ? 20 : (idx === 1 ? 10 : 5);
 
           return (
             <motion.div
