@@ -453,7 +453,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="w-full flex flex-col gap-6 md:h-[680px] overflow-hidden">
+          <div className="w-full flex flex-col gap-6 md:h-[720px] overflow-hidden">
             {/* Top Row: 2 cards */}
             <div
               className="flex flex-col md:flex-row gap-6 w-full transition-all duration-500 ease-in-out flex-nowrap"
