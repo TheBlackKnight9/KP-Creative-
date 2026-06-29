@@ -132,10 +132,10 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { num: "01", title: "Discovery & Research", desc: "We dive deep into your business, audience, and competition. Stakeholder interviews, analytics audits, and competitive analysis set the direction.", icon: Search },
-  { num: "02", title: "Strategy & Planning", desc: "A tailored game plan covering information architecture, design direction, tech stack, content strategy, and go-to-market timeline.", icon: Map },
-  { num: "03", title: "Design & Development", desc: "We craft pixel-perfect designs in Figma, then bring them to life with clean, modern code. Iterative reviews keep you in the loop.", icon: Code },
-  { num: "04", title: "Launch & Optimise", desc: "Post-launch support, performance monitoring, A/B testing, and iterative improvements to keep growing month after month.", icon: Target },
+  { num: "01", title: "Discovery & Research", desc: "We dive deep into your business, audience, and competition to lay a strategic foundation.", icon: Search },
+  { num: "02", title: "Strategy & Planning", desc: "A tailored game plan covering user experience, design direction, tech stack, and timeline.", icon: Map },
+  { num: "03", title: "Design & Development", desc: "We craft pixel-perfect designs in Figma and bring them to life with clean, high-performance code.", icon: Code },
+  { num: "04", title: "Launch & Optimise", desc: "Post-launch support, performance monitoring, and optimizations to keep your brand scaling.", icon: Target },
 ];
 
 const WHY_US = [
@@ -653,14 +653,14 @@ export default function HomePage() {
                         /* Left Card: on mobile, bubble is on the left; on desktop, bubble is on the right next to center line */
                         <motion.div 
                           whileHover={{ scale: 1.02, y: -4 }}
-                          className={`w-full max-w-[420px] rounded-[28px] md:rounded-full py-6 px-8 md:px-10 flex flex-row-reverse md:flex-row items-center justify-between gap-6 transition-all duration-300 ${bgClass}`}
+                          className={`w-full max-w-[420px] rounded-[24px] md:rounded-full py-4 px-8 md:px-10 flex flex-row-reverse md:flex-row items-center justify-between gap-6 transition-all duration-300 ${bgClass}`}
                         >
                           <div className="flex flex-col flex-1 text-left">
                             <h3 className={`text-base md:text-lg font-bold tracking-tight mb-1 ${textClass}`}>{step.title}</h3>
                             <p className={`text-xs md:text-sm leading-relaxed ${descClass}`}>{step.desc}</p>
                           </div>
-                          <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shrink-0 ${bubbleClass}`}>
-                            {Icon && <Icon className={iconClass} size={22} />}
+                          <div className={`w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center shrink-0 ${bubbleClass}`}>
+                            {Icon && <Icon className={iconClass} size={20} />}
                           </div>
                         </motion.div>
                       ) : (
@@ -689,14 +689,14 @@ export default function HomePage() {
                         /* Right Card: bubble is on the left next to central line on desktop, and next to left line on mobile */
                         <motion.div 
                           whileHover={{ scale: 1.02, y: -4 }}
-                          className={`w-full max-w-[420px] rounded-[28px] md:rounded-full py-6 px-8 md:px-10 flex flex-row-reverse items-center justify-between gap-6 transition-all duration-300 ${bgClass}`}
+                          className={`w-full max-w-[420px] rounded-[24px] md:rounded-full py-4 px-8 md:px-10 flex flex-row-reverse items-center justify-between gap-6 transition-all duration-300 ${bgClass}`}
                         >
                           <div className="flex flex-col flex-1 text-left">
                             <h3 className={`text-base md:text-lg font-bold tracking-tight mb-1 ${textClass}`}>{step.title}</h3>
                             <p className={`text-xs md:text-sm leading-relaxed ${descClass}`}>{step.desc}</p>
                           </div>
-                          <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shrink-0 ${bubbleClass}`}>
-                            {Icon && <Icon className={iconClass} size={22} />}
+                          <div className={`w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center shrink-0 ${bubbleClass}`}>
+                            {Icon && <Icon className={iconClass} size={20} />}
                           </div>
                         </motion.div>
                       )}
