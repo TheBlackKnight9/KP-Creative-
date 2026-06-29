@@ -213,7 +213,7 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
     <div
       onMouseEnter={onHover}
       onFocus={onHover}
-      className={`relative overflow-hidden rounded-[20px] border transition-all duration-500 ease-in-out w-full h-full cursor-pointer flex
+      className={`relative overflow-hidden rounded-[20px] border smooth-expand w-full h-full cursor-pointer flex
         ${isExpanded 
           ? "border-[#C4501A]/50 bg-[#F5EDE8] shadow-[0_22px_48px_rgba(28,15,10,0.12)] py-6 px-8" 
           : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] py-5 px-6 hover:border-[#C4501A]/30"
@@ -222,10 +222,10 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
       <div className={`flex w-full h-full ${isExpanded && !isMobile ? "flex-row justify-between items-center gap-6" : "flex-col justify-between items-start"}`}>
         
         {/* Left Column: Text Content */}
-        <div className={`flex flex-col items-start transition-all duration-500 ease-in-out ${isExpanded && !isMobile ? "w-[58%]" : "w-full"}`}>
+        <div className={`flex flex-col items-start smooth-expand ${isExpanded && !isMobile ? "w-[58%]" : "w-full"}`}>
           {/* Icon */}
           <div
-            className={`flex items-center justify-center rounded-[14px] text-[#C4501A] transition-all duration-500 ease-in-out
+            className={`flex items-center justify-center rounded-[14px] text-[#C4501A] smooth-expand
               ${isExpanded ? "w-14 h-14 bg-[#C4501A]/18 mb-4" : "w-11 h-11 bg-[#C4501A]/10 mb-3"}`}
           >
             <Icon size={isExpanded ? 26 : 20} />
@@ -242,35 +242,42 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
 
           {/* Title */}
           <h3
-            className={`font-bold tracking-tight text-[#1C0F0A] transition-all duration-500 ease-in-out leading-tight
+            className={`font-bold tracking-tight text-[#1C0F0A] smooth-expand leading-tight
               ${isExpanded ? "text-2xl mb-2" : "text-[16px] md:text-[18px] mb-0"}`}
           >
             {s.title}
           </h3>
 
-          {/* Description & List (Expand/Collapse inline with Tailwind transition-all) */}
-          <div
-            className={`w-full overflow-hidden transition-all duration-500 ease-in-out
-              ${isExpanded ? "opacity-100 max-h-[300px] mt-2" : "opacity-0 max-h-0 pointer-events-none"}`}
-          >
-            {s.desc && (
-              <p className="text-sm text-[#1C0F0A]/60 leading-relaxed mb-4">
-                {s.desc}
-              </p>
-            )}
+          {/* Description & List (Expand/Collapse with hardware-accelerated height animation) */}
+          <AnimatePresence initial={false}>
+            {isExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full overflow-hidden mt-2"
+              >
+                {s.desc && (
+                  <p className="text-sm text-[#1C0F0A]/60 leading-relaxed mb-4">
+                    {s.desc}
+                  </p>
+                )}
 
-            <ul className="list-none p-0 m-0 flex flex-col gap-2">
-              {s.features.map((f, i) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-2 text-xs font-semibold text-[#1C0F0A]"
-                >
-                  <span className="text-[#C4501A] font-bold text-sm leading-none">•</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
+                <ul className="list-none p-0 m-0 flex flex-col gap-2">
+                  {s.features.map((f, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-2 text-xs font-semibold text-[#1C0F0A]"
+                    >
+                      <span className="text-[#C4501A] font-bold text-sm leading-none">•</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {!isExpanded && (
             <ul className="list-none p-0 mt-3 flex flex-col gap-1 w-full opacity-90">
@@ -287,14 +294,15 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
           )}
         </div>
 
-        {/* Right Column: Styled Preview Box (for expanded cards on desktop) */}
-        {!isMobile && isExpanded && s.image && (
-          <div className="w-[42%] h-full flex items-center justify-center pl-2 overflow-hidden">
+        {/* Right Column: Styled Preview Box (for expanded cards on desktop with smooth fade in/out) */}
+        <AnimatePresence>
+          {!isMobile && isExpanded && s.image && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.9, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.9, x: 20 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="w-[42%] h-full flex items-center justify-center pl-2 overflow-hidden shrink-0"
             >
               <motion.img
                 src={s.image}
@@ -310,8 +318,8 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
                 }}
               />
             </motion.div>
-          </div>
-        )}
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -609,7 +617,7 @@ export default function HomePage() {
           <div className="w-full flex flex-col gap-6 md:h-[720px] overflow-hidden">
             {/* Top Row: 2 cards */}
             <div
-              className="flex flex-col md:flex-row gap-6 w-full transition-all duration-500 ease-in-out flex-nowrap"
+              className="flex flex-col md:flex-row gap-6 w-full smooth-expand flex-nowrap"
               style={{
                 flexGrow: (activeId === 0 || activeId === 1) ? 1.4 : 1,
                 flexShrink: 1,
@@ -617,7 +625,7 @@ export default function HomePage() {
               }}
             >
               <motion.div
-                className="h-full flex transition-all duration-500 ease-in-out"
+                className="h-full flex smooth-expand"
                 style={{
                   flexGrow: activeId === 0 ? 2.5 : 1,
                   flexShrink: 1,
@@ -638,7 +646,7 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div
-                className="h-full flex transition-all duration-500 ease-in-out"
+                className="h-full flex smooth-expand"
                 style={{
                   flexGrow: activeId === 1 ? 2.5 : 1,
                   flexShrink: 1,
@@ -661,7 +669,7 @@ export default function HomePage() {
 
             {/* Bottom Row: 3 cards */}
             <div
-              className="flex flex-col md:flex-row gap-6 w-full transition-all duration-500 ease-in-out flex-nowrap"
+              className="flex flex-col md:flex-row gap-6 w-full smooth-expand flex-nowrap"
               style={{
                 flexGrow: (activeId === 2 || activeId === 3 || activeId === 4) ? 1.4 : 1,
                 flexShrink: 1,
@@ -669,7 +677,7 @@ export default function HomePage() {
               }}
             >
               <motion.div
-                className="h-full flex transition-all duration-500 ease-in-out"
+                className="h-full flex smooth-expand"
                 style={{
                   flexGrow: activeId === 2 ? 1.8 : 1,
                   flexShrink: 1,
@@ -690,7 +698,7 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div
-                className="h-full flex transition-all duration-500 ease-in-out"
+                className="h-full flex smooth-expand"
                 style={{
                   flexGrow: activeId === 3 ? 1.8 : 1,
                   flexShrink: 1,
@@ -711,7 +719,7 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div
-                className="h-full flex transition-all duration-500 ease-in-out"
+                className="h-full flex smooth-expand"
                 style={{
                   flexGrow: activeId === 4 ? 1.8 : 1,
                   flexShrink: 1,
