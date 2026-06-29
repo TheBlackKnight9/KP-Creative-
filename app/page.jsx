@@ -18,6 +18,8 @@ import {
   PenTool,
   Megaphone,
   Video,
+  Map,
+  CheckCircle2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -130,10 +132,10 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { num: "01", title: "Discovery & Research", desc: "We dive deep into your business, audience, and competition. Stakeholder interviews, analytics audits, and competitive analysis set the direction." },
-  { num: "02", title: "Strategy & Planning", desc: "A tailored game plan covering information architecture, design direction, tech stack, content strategy, and go-to-market timeline." },
-  { num: "03", title: "Design & Development", desc: "We craft pixel-perfect designs in Figma, then bring them to life with clean, modern code. Iterative reviews keep you in the loop." },
-  { num: "04", title: "Launch & Optimise", desc: "Post-launch support, performance monitoring, A/B testing, and iterative improvements to keep growing month after month." },
+  { num: "01", title: "Discovery & Research", desc: "We dive deep into your business, audience, and competition. Stakeholder interviews, analytics audits, and competitive analysis set the direction.", icon: Search },
+  { num: "02", title: "Strategy & Planning", desc: "A tailored game plan covering information architecture, design direction, tech stack, content strategy, and go-to-market timeline.", icon: Map },
+  { num: "03", title: "Design & Development", desc: "We craft pixel-perfect designs in Figma, then bring them to life with clean, modern code. Iterative reviews keep you in the loop.", icon: Code },
+  { num: "04", title: "Launch & Optimise", desc: "Post-launch support, performance monitoring, A/B testing, and iterative improvements to keep growing month after month.", icon: Target },
 ];
 
 const WHY_US = [
@@ -562,7 +564,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ PROCESS ═══ */}
-      <section className="section section--blush-deep" id="process">
+      <section className="section section--blush-deep" id="process" style={{ overflow: "hidden" }}>
         <div className="container">
           <div className="section-header">
             <TagPill>Our Process</TagPill>
@@ -578,27 +580,138 @@ export default function HomePage() {
             </p>
           </div>
 
-          <motion.div
-            className="grid-2"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {PROCESS.map((step) => (
-              <motion.div key={step.num} variants={fadeInUp}>
-                <ClayCard sand>
-                  <div className="process-step">
-                    <div className="process-number">{step.num}</div>
-                    <div className="process-content">
-                      <h3 className="text-h3">{step.title}</h3>
-                      <p className="text-body">{step.desc}</p>
+          <div className="relative w-full max-w-5xl mx-auto py-12 md:py-20 mt-12">
+            {/* SVG S-Curve dotted timeline path (Desktop only) */}
+            <svg 
+              className="absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-40 h-full pointer-events-none hidden md:block" 
+              viewBox="0 0 160 800" 
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M 80 20 C 180 180, -20 220, 80 400 C 180 580, -20 620, 80 800"
+                fill="none"
+                stroke="var(--terracotta)"
+                strokeWidth="2.5"
+                strokeDasharray="6,6"
+                opacity="0.35"
+              />
+            </svg>
+
+            {/* Straight vertical line for mobile */}
+            <div className="absolute left-6 top-4 bottom-4 w-[2px] border-l-2 border-dashed border-[#C4501A]/35 md:hidden" />
+
+            <div className="flex flex-col gap-12 md:gap-16 relative">
+              {PROCESS.map((step, idx) => {
+                const isLeft = idx % 2 === 0;
+                const Icon = step.icon;
+
+                // Alternate background styling based on brand colors
+                let bgClass = "";
+                let textClass = "";
+                let descClass = "";
+                let bubbleClass = "";
+                let iconClass = "";
+
+                if (idx === 0) {
+                  bgClass = "bg-[#C4501A] shadow-[0_12px_32px_rgba(196,80,26,0.15)]";
+                  textClass = "text-white";
+                  descClass = "text-white/80";
+                  bubbleClass = "bg-[#FAF5F2] shadow-[inset_-3px_-3px_8px_rgba(28,15,10,0.04),_0_8px_16px_rgba(0,0,0,0.1)]";
+                  iconClass = "text-[#C4501A]";
+                } else if (idx === 1) {
+                  bgClass = "bg-[#F5EDE8] border border-[#D9C8BF]/30 shadow-[0_12px_32px_rgba(28,15,10,0.04)]";
+                  textClass = "text-[#1C0F0A]";
+                  descClass = "text-[#1C0F0A]/60";
+                  bubbleClass = "bg-[#C4501A] shadow-[0_8px_16px_rgba(196,80,26,0.15)]";
+                  iconClass = "text-white";
+                } else if (idx === 2) {
+                  bgClass = "bg-[#1C0F0A] shadow-[0_12px_32px_rgba(28,15,10,0.2)]";
+                  textClass = "text-white";
+                  descClass = "text-white/70";
+                  bubbleClass = "bg-[#C4501A] shadow-[0_8px_16px_rgba(196,80,26,0.15)]";
+                  iconClass = "text-white";
+                } else {
+                  bgClass = "bg-[#C4501A] shadow-[0_12px_32px_rgba(196,80,26,0.15)]";
+                  textClass = "text-white";
+                  descClass = "text-white/80";
+                  bubbleClass = "bg-[#FAF5F2] shadow-[inset_-3px_-3px_8px_rgba(28,15,10,0.04),_0_8px_16px_rgba(0,0,0,0.1)]";
+                  iconClass = "text-[#C4501A]";
+                }
+
+                return (
+                  <motion.div 
+                    key={step.num}
+                    className="w-full flex flex-col md:grid md:grid-cols-[1fr_100px_1fr] items-center relative"
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ type: "spring", stiffness: 120, damping: 20, delay: idx * 0.1 }}
+                  >
+                    {/* LEFT COLUMN */}
+                    <div className={`w-full flex ${isLeft ? "justify-start pl-12 pr-4 md:pl-0 md:justify-end md:pr-0" : "justify-start pl-12 pr-4 md:pl-0 md:justify-end md:pr-12 md:text-right order-2 md:order-1"}`}>
+                      {isLeft ? (
+                        /* Left Card: on mobile, bubble is on the left; on desktop, bubble is on the right next to center line */
+                        <motion.div 
+                          whileHover={{ scale: 1.02, y: -4 }}
+                          className={`w-full max-w-[420px] rounded-[28px] md:rounded-full py-6 px-8 md:px-10 flex flex-row-reverse md:flex-row items-center justify-between gap-6 transition-all duration-300 ${bgClass}`}
+                        >
+                          <div className="flex flex-col flex-1 text-left">
+                            <h3 className={`text-base md:text-lg font-bold tracking-tight mb-1 ${textClass}`}>{step.title}</h3>
+                            <p className={`text-xs md:text-sm leading-relaxed ${descClass}`}>{step.desc}</p>
+                          </div>
+                          <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shrink-0 ${bubbleClass}`}>
+                            {Icon && <Icon className={iconClass} size={22} />}
+                          </div>
+                        </motion.div>
+                      ) : (
+                        /* Step Number Indicator (Left Card Row) - hidden on mobile */
+                        <div className="hidden md:flex flex-col items-end pr-10">
+                          <span className="font-display text-5xl font-extrabold text-[#C4501A]/35 tracking-tight">{`STEP ${step.num}`}</span>
+                          <span className="text-[10px] font-bold tracking-widest text-[#1C0F0A]/40 uppercase mt-1">Our Process</span>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </ClayCard>
-              </motion.div>
-            ))}
-          </motion.div>
+
+                    {/* MIDDLE COLUMN (Timeline dot/ring - matches SVG path crossing) */}
+                    <div className="absolute left-6 top-[28px] md:top-1/2 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:static md:translate-y-0 flex items-center justify-center h-full order-1 md:order-2 z-10">
+                      <div className="w-5 h-5 rounded-full bg-[#FAF5F2] border-4 border-[#C4501A] shadow-sm" />
+                    </div>
+
+                    {/* RIGHT COLUMN */}
+                    <div className={`w-full flex ${isLeft ? "justify-start pl-12 pr-4 md:pl-0 md:justify-start md:pl-12 text-left order-3 md:order-3" : "justify-start pl-12 pr-4 md:pl-0 order-3 md:order-3"}`}>
+                      {isLeft ? (
+                        /* Step Number Indicator (Right Card Row) - hidden on mobile */
+                        <div className="hidden md:flex flex-col items-start pl-10">
+                          <span className="font-display text-5xl font-extrabold text-[#C4501A]/35 tracking-tight">{`STEP ${step.num}`}</span>
+                          <span className="text-[10px] font-bold tracking-widest text-[#1C0F0A]/40 uppercase mt-1">Our Process</span>
+                        </div>
+                      ) : (
+                        /* Right Card: bubble is on the left next to central line on desktop, and next to left line on mobile */
+                        <motion.div 
+                          whileHover={{ scale: 1.02, y: -4 }}
+                          className={`w-full max-w-[420px] rounded-[28px] md:rounded-full py-6 px-8 md:px-10 flex flex-row-reverse items-center justify-between gap-6 transition-all duration-300 ${bgClass}`}
+                        >
+                          <div className="flex flex-col flex-1 text-left">
+                            <h3 className={`text-base md:text-lg font-bold tracking-tight mb-1 ${textClass}`}>{step.title}</h3>
+                            <p className={`text-xs md:text-sm leading-relaxed ${descClass}`}>{step.desc}</p>
+                          </div>
+                          <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shrink-0 ${bubbleClass}`}>
+                            {Icon && <Icon className={iconClass} size={22} />}
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
+
+                    {/* Mobile Only: Step Number Tag */}
+                    <div className="w-full pl-12 pr-4 md:hidden mt-2 mb-4 order-3 flex items-center gap-2">
+                      <span className="font-display text-[10px] font-extrabold tracking-widest text-[#C4501A]/55 uppercase">{`STEP ${step.num}`}</span>
+                      <div className="h-[1px] bg-[#D9C8BF]/30 flex-1" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
