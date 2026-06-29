@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -120,31 +121,59 @@ const SERVICES = [
   }
 ];
 
-const PACKAGES = [
+const ENGAGEMENT_MODELS = [
   {
-    name: "Starter",
-    price: "₹50K",
-    period: "one-time",
-    desc: "Perfect for startups and small businesses needing a strong online presence.",
-    features: ["Single-page website", "Mobile responsive design", "Basic SEO setup", "Contact form integration", "1 round of revisions", "2-week delivery"],
-    popular: false,
+    title: "Project-Based Development",
+    desc: "Perfect for startups and businesses looking to establish or upgrade their digital presence with a custom-built solution.",
+    features: [
+      "Custom Strategy",
+      "Discovery & Planning",
+      "Fixed Project Timeline",
+      "UI/UX Design",
+      "Website Development",
+      "Quality Assurance",
+      "Launch Support",
+      "Post-Launch Assistance"
+    ],
+    buttonText: "Start Your Project",
+    image: "/images/clay-web-design.png",
+    featured: false
   },
   {
-    name: "Growth",
-    price: "₹1.5L",
-    period: "one-time",
-    desc: "For businesses ready to level up with a comprehensive digital presence.",
-    features: ["Multi-page website (up to 8 pages)", "Custom animations & interactions", "Advanced SEO optimisation", "CMS integration", "Blog setup", "3 rounds of revisions", "4-week delivery"],
-    popular: true,
+    title: "Monthly Growth Partnership",
+    desc: "Ideal for businesses that want continuous digital marketing, content creation, and long-term online growth.",
+    features: [
+      "Social Media Management",
+      "Content Strategy",
+      "Reels & Short-form Videos",
+      "Instagram & Meta Ads",
+      "Monthly Performance Reports",
+      "Website Maintenance",
+      "SEO Improvements",
+      "Dedicated Account Support"
+    ],
+    buttonText: "Grow My Business",
+    image: "/images/clay-social-media.png",
+    featured: true,
+    badge: "MOST POPULAR"
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    period: "scoped",
-    desc: "Full-service engagement for ambitious brands with complex requirements.",
-    features: ["Unlimited pages", "Custom web application features", "E-commerce integration", "Performance marketing setup", "Brand identity package", "Dedicated project manager", "Ongoing support retainer"],
-    popular: false,
-  },
+    title: "Complete Digital Transformation",
+    desc: "A comprehensive solution for established businesses looking to scale with a complete digital ecosystem.",
+    features: [
+      "Premium Website",
+      "Branding & Identity",
+      "SEO Strategy",
+      "Paid Advertising",
+      "Content Creation",
+      "Lead Generation",
+      "Growth Consultation",
+      "Long-Term Partnership"
+    ],
+    buttonText: "Let's Scale Together",
+    image: "/images/clay-shapes-stacked-v3.png",
+    featured: false
+  }
 ];
 
 const SERVICE_FAQS = [
@@ -176,6 +205,120 @@ const fadeInUp = {
     },
   },
 };
+
+function ModelCard({ model }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      variants={{
+        hidden: { opacity: 0, y: 35 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "spring",
+            stiffness: 120,
+            damping: 20
+          }
+        }
+      }}
+      className={`relative rounded-[24px] border p-8 flex flex-col h-full justify-between transition-all duration-500 ease-in-out cursor-pointer
+        ${model.featured 
+          ? "border-[#C4501A] bg-[#F5EDE8] shadow-[0_30px_60px_rgba(28,15,10,0.12)] md:scale-[1.03]" 
+          : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] hover:border-[#C4501A]"
+        }
+        ${hovered ? "shadow-[0_30px_60px_rgba(28,15,10,0.15)] -translate-y-2 border-[#C4501A]" : ""}
+      `}
+      style={{
+        transition: "border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
+      }}
+    >
+      <div className="flex flex-col items-start w-full">
+        {/* Badge */}
+        {model.badge && (
+          <span className="text-[10px] font-bold tracking-wider uppercase text-white bg-[#C4501A] px-3 py-1 rounded-full mb-4 inline-block shadow-sm">
+            {model.badge}
+          </span>
+        )}
+
+        {/* Title */}
+        <h3 className="text-xl md:text-2xl font-bold text-[#1C0F0A] tracking-tight mb-3">
+          {model.title}
+        </h3>
+
+        {/* Illustration */}
+        {model.image && (
+          <div className="w-full flex items-center justify-center py-4 mb-4 bg-[#1C0F0A]/[0.02] rounded-[16px] overflow-hidden">
+            <motion.img
+              src={model.image}
+              alt={model.title}
+              className="max-h-[140px] object-contain mix-blend-multiply drop-shadow-[0_8px_24px_rgba(28,15,10,0.06)]"
+              animate={{
+                scale: hovered ? 1.05 : 1,
+                y: hovered ? [0, -6, 0] : 0
+              }}
+              transition={{
+                scale: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                y: hovered ? {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                } : { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+              }}
+            />
+          </div>
+        )}
+
+        {/* Description */}
+        <p className="text-sm text-[#1C0F0A]/60 leading-relaxed mb-6">
+          {model.desc}
+        </p>
+
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-[#D9C8BF] mb-6" />
+
+        {/* Features List */}
+        <ul className="list-none p-0 m-0 flex flex-col gap-3 w-full mb-8">
+          {model.features.map((f, i) => (
+            <motion.li
+              key={f}
+              animate={{
+                y: hovered ? -3 : 0,
+                opacity: hovered ? 1 : 0.85,
+              }}
+              transition={{
+                delay: i * 0.04,
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className="flex items-center gap-3 text-sm font-semibold text-[#1C0F0A]"
+            >
+              <CheckCircle size={16} className="text-[#C4501A] shrink-0" />
+              <span>{f}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Button */}
+      <Link
+        href="/contact"
+        className={`btn w-full flex items-center justify-center gap-2 ${model.featured ? "btn-primary" : "btn-secondary"}`}
+      >
+        <span>{model.buttonText}</span>
+        <motion.span
+          animate={{ x: hovered ? 4 : 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <ArrowRight size={16} />
+        </motion.span>
+      </Link>
+    </motion.div>
+  );
+}
 
 export default function ServicesPage() {
   return (
@@ -225,51 +368,39 @@ export default function ServicesPage() {
       {/* ═══ SERVICE EXPLORER ═══ */}
       <ServiceExplorer />
 
-      {/* ═══ PRICING ═══ */}
-      <section className="section section--blush-deep" id="pricing">
+      {/* ═══ ENGAGEMENT MODELS ═══ */}
+      <section className="section section--blush-deep" id="engagement-models">
         <div className="container">
-          <div className="section-header">
-            <TagPill>Pricing</TagPill>
-            <h2 className="text-h1">Transparent <span className="text-accent">Pricing</span></h2>
+          <motion.div 
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <TagPill>Engagement Models</TagPill>
+            <h2 className="text-h1">Choose the Right <span className="text-accent">Engagement Model</span></h2>
             <p className="text-body">
-              No hidden fees. No surprise invoices. Here&apos;s what to expect.
+              Whether you&apos;re launching a new business, looking for consistent monthly growth, or planning a complete digital transformation, we offer flexible engagement models tailored to your goals.
             </p>
-          </div>
+          </motion.div>
+
           <motion.div
-            className="grid-3"
-            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch w-full"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.12,
+                },
+              },
+            }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            {PACKAGES.map((pkg) => (
-              <motion.div key={pkg.name} variants={fadeInUp}>
-                <ClayCard featured={pkg.popular} sand={!pkg.popular}>
-                  <div style={{ position: "relative" }}>
-                    {pkg.popular && <div className="pricing-badge">Most Popular</div>}
-                    <h3 className="text-h3" style={{ marginBottom: "0.5rem" }}>{pkg.name}</h3>
-                    <div className="pricing-amount">
-                      {pkg.price} <span className="pricing-period">/{pkg.period}</span>
-                    </div>
-                    <p className="text-body" style={{ fontSize: "0.9rem", marginTop: "0.75rem" }}>{pkg.desc}</p>
-                    <div className="pricing-features">
-                      {pkg.features.map((f) => (
-                        <div key={f} className="pricing-feature">
-                          <CheckCircle size={16} />
-                          <span>{f}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Link
-                      href="/contact"
-                      className={`btn ${pkg.popular ? "btn-primary" : "btn-secondary"}`}
-                      style={{ width: "100%" }}
-                    >
-                      Get Started <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </ClayCard>
-              </motion.div>
+            {ENGAGEMENT_MODELS.map((model) => (
+              <ModelCard key={model.title} model={model} />
             ))}
           </motion.div>
         </div>
