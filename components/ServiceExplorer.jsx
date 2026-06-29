@@ -68,8 +68,8 @@ function FloatingCard({ service, cardX, cardY, tilt, visible }) {
   const Icon = service?.icon;
   const [arrowHover, setArrowHover] = useState(false);
 
-  const shadowBlur    = useTransform(tilt, [-3, 0, 3], [48, 22, 48]);
-  const shadowOpacity = useTransform(tilt, [-3, 0, 3], [0.22, 0.09, 0.22]);
+  const shadowBlur    = useTransform(tilt, [-12, 0, 12], [64, 22, 64]);
+  const shadowOpacity = useTransform(tilt, [-12, 0, 12], [0.28, 0.09, 0.28]);
   const boxShadow = useTransform(
     [shadowBlur, shadowOpacity],
     ([b, o]) => `0 ${b}px ${b * 2}px rgba(28,15,10,${o}), 0 4px 14px rgba(28,15,10,0.05)`
@@ -247,10 +247,10 @@ export default function ServiceExplorer() {
   const rawY = useMotionValue(0);
 
   const velX    = useVelocity(rawX);
-  const tiltRaw = useTransform(velX, [-1600, 0, 1600], [-3, 0, 3]);
-  const tilt    = useSpring(tiltRaw, { stiffness: 85, damping: 18, mass: 0.6 });
+  const tiltRaw = useTransform(velX, [-2000, 0, 2000], [-12, 0, 12]);
+  const tilt    = useSpring(tiltRaw, { stiffness: 65, damping: 14, mass: 0.7 });
 
-  const cfg   = { stiffness: 145, damping: 20, mass: 0.7 };
+  const cfg   = { stiffness: 95, damping: 16, mass: 0.8 };
   const cardX = useSpring(rawX, cfg);
   const cardY = useSpring(rawY, cfg);
 
