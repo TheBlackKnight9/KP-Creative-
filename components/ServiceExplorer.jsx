@@ -91,28 +91,28 @@ function FloatingCard({ service, cardX, cardY, tilt, visible }) {
             animate={{ y: 0 }}
             exit={{ y: 14 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            style={{ width: `${CARD_W}px`, background: "var(--sand)", border: "1.5px solid rgba(196,80,26,0.3)", borderRadius: "20px", padding: "22px", boxShadow, backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
+            style={{ width: `${CARD_W}px`, background: "var(--terracotta)", border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: "20px", padding: "22px", boxShadow, backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
           >
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "1rem" }}>
               <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-                style={{ width: 42, height: 42, borderRadius: "11px", background: "var(--blush-deep)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--terracotta)", flexShrink: 0 }}
+                style={{ width: 42, height: 42, borderRadius: "11px", background: "rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffffff", flexShrink: 0 }}
               >
                 {Icon && <Icon size={20} strokeWidth={1.6} />}
               </motion.div>
-              <span style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "var(--terracotta)", background: "rgba(196,80,26,0.09)", border: "1px solid rgba(196,80,26,0.17)", padding: "3px 9px", borderRadius: "100px", marginTop: "2px" }}>
+              <span style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "#ffffff", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", padding: "3px 9px", borderRadius: "100px", marginTop: "2px" }}>
                 {service.badge}
               </span>
             </div>
-            <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--ink)", lineHeight: 1.3, marginBottom: "0.65rem", fontFamily: "var(--font-display,'Bricolage Grotesque'),sans-serif", letterSpacing: "-0.01em" }}>
+            <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "#ffffff", lineHeight: 1.3, marginBottom: "0.65rem", fontFamily: "var(--font-display,'Bricolage Grotesque'),sans-serif", letterSpacing: "-0.01em" }}>
               {service.title}
             </p>
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-              style={{ height: "1px", background: "var(--blush-border)", marginBottom: "0.85rem", transformOrigin: "left" }}
+              style={{ height: "1px", background: "rgba(255,255,255,0.25)", marginBottom: "0.85rem", transformOrigin: "left" }}
             />
             <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1rem", display: "flex", flexDirection: "column", gap: "0.38rem" }}>
               {service.features.map((f, i) => (
@@ -121,9 +121,9 @@ function FloatingCard({ service, cardX, cardY, tilt, visible }) {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.07 + i * 0.04, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ display: "flex", alignItems: "center", gap: "7px", fontSize: "0.81rem", color: "var(--ink)", fontWeight: 600, lineHeight: 1.4 }}
+                  style={{ display: "flex", alignItems: "center", gap: "7px", fontSize: "0.81rem", color: "#ffffff", fontWeight: 600, lineHeight: 1.4 }}
                 >
-                  <CheckCircle2 size={12} strokeWidth={2} style={{ color: "var(--terracotta)", flexShrink: 0 }} />
+                  <CheckCircle2 size={12} strokeWidth={2} style={{ color: "#ffffff", flexShrink: 0 }} />
                   {f}
                 </motion.li>
               ))}
@@ -131,11 +131,11 @@ function FloatingCard({ service, cardX, cardY, tilt, visible }) {
             <motion.div
               onHoverStart={() => setArrowHover(true)}
               onHoverEnd={() => setArrowHover(false)}
-              style={{ display: "inline-flex", alignItems: "center", gap: "5px", fontSize: "0.79rem", fontWeight: 600, color: "var(--terracotta)", pointerEvents: "auto", cursor: "pointer" }}
+              style={{ display: "inline-flex", alignItems: "center", gap: "5px", fontSize: "0.79rem", fontWeight: 600, color: "#ffffff", pointerEvents: "auto", cursor: "pointer" }}
             >
               <span>{"Let's create something amazing"}</span>
               <motion.span animate={{ x: arrowHover ? 6 : 0 }} transition={{ type: "spring", stiffness: 340, damping: 22 }}>
-                <ArrowRight size={13} />
+                <ArrowRight size={13} style={{ color: "#ffffff" }} />
               </motion.span>
             </motion.div>
           </motion.div>
