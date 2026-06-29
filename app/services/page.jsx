@@ -252,22 +252,10 @@ function ModelCard({ model }) {
         {/* Illustration */}
         {model.image && (
           <div className="w-full flex items-center justify-center py-4 mb-4 bg-[#1C0F0A]/[0.02] rounded-[16px] overflow-hidden">
-            <motion.img
+            <img
               src={model.image}
               alt={model.title}
               className="max-h-[140px] object-contain mix-blend-multiply drop-shadow-[0_8px_24px_rgba(28,15,10,0.06)]"
-              animate={{
-                scale: hovered ? 1.05 : 1,
-                y: hovered ? [0, -6, 0] : 0
-              }}
-              transition={{
-                scale: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-                y: hovered ? {
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                } : { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-              }}
             />
           </div>
         )}
