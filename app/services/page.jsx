@@ -171,7 +171,7 @@ const ENGAGEMENT_MODELS = [
       "Long-Term Partnership"
     ],
     buttonText: "Let's Scale Together",
-    image: "/images/clay-shapes-stacked-v3.png",
+    image: "/images/clay-digital-transformation.png",
     featured: false
   }
 ];
