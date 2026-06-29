@@ -204,8 +204,8 @@ function ServiceCard({ s, isExpanded, isMobile, onHover }) {
       onFocus={onHover}
       className={`relative overflow-hidden rounded-[20px] border transition-all duration-500 ease-in-out w-full h-full cursor-pointer flex
         ${isExpanded 
-          ? "border-[#C4501A]/50 bg-[#F5EDE8] shadow-[0_22px_48px_rgba(28,15,10,0.12)] p-8" 
-          : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] p-6 hover:border-[#C4501A]/30"
+          ? "border-[#C4501A]/50 bg-[#F5EDE8] shadow-[0_22px_48px_rgba(28,15,10,0.12)] py-6 px-8" 
+          : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] py-5 px-6 hover:border-[#C4501A]/30"
         }`}
     >
       <div className={`flex w-full h-full ${isExpanded && !isMobile ? "flex-row justify-between items-center gap-6" : "flex-col justify-between items-start"}`}>
@@ -431,7 +431,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="w-full flex flex-col gap-6 md:h-[600px] overflow-hidden">
+          <div className="w-full flex flex-col gap-6 md:h-[680px] overflow-hidden">
             {/* Top Row: 2 cards */}
             <div
               className="flex flex-col md:flex-row gap-6 w-full transition-all duration-500 ease-in-out flex-nowrap"
