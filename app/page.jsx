@@ -205,7 +205,7 @@ const heroImageVariants = {
   },
 };
 
-function ServiceCard({ s, isExpanded, isMobile, onHover }) {
+function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
   const Icon = s.icon;
 
   return (
@@ -273,7 +273,7 @@ function ServiceCard({ s, isExpanded, isMobile, onHover }) {
 
           {!isExpanded && (
             <ul className="list-none p-0 mt-3 flex flex-col gap-1 w-full opacity-90">
-              {s.features.slice(0, 3).map((f, i) => (
+              {s.features.slice(0, isRowActive ? 5 : 3).map((f, i) => (
                 <li
                   key={i}
                   className="flex items-center gap-1.5 text-[11px] font-semibold text-[#1C0F0A]/70 truncate"
@@ -480,6 +480,7 @@ export default function HomePage() {
                   isExpanded={activeId === 0}
                   isMobile={isMobile}
                   onHover={() => setActiveId(0)}
+                  isRowActive={activeId === 0 || activeId === 1}
                 />
               </motion.div>
 
@@ -500,6 +501,7 @@ export default function HomePage() {
                   isExpanded={activeId === 1}
                   isMobile={isMobile}
                   onHover={() => setActiveId(1)}
+                  isRowActive={activeId === 0 || activeId === 1}
                 />
               </motion.div>
             </div>
@@ -530,6 +532,7 @@ export default function HomePage() {
                   isExpanded={activeId === 2}
                   isMobile={isMobile}
                   onHover={() => setActiveId(2)}
+                  isRowActive={activeId === 2 || activeId === 3 || activeId === 4}
                 />
               </motion.div>
 
@@ -550,6 +553,7 @@ export default function HomePage() {
                   isExpanded={activeId === 3}
                   isMobile={isMobile}
                   onHover={() => setActiveId(3)}
+                  isRowActive={activeId === 2 || activeId === 3 || activeId === 4}
                 />
               </motion.div>
 
@@ -570,6 +574,7 @@ export default function HomePage() {
                   isExpanded={activeId === 4}
                   isMobile={isMobile}
                   onHover={() => setActiveId(4)}
+                  isRowActive={activeId === 2 || activeId === 3 || activeId === 4}
                 />
               </motion.div>
             </div>
