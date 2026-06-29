@@ -43,7 +43,9 @@ const SERVICES = [
       "Premium Custom Solutions",
       "Mobile Responsive Design",
       "WhatsApp & Form Integration",
-      "Advanced SEO & Speed Optimization"
+      "Advanced SEO & Speed Optimization",
+      "Custom UI/UX Prototyping",
+      "Domain & Hosting Setup Support"
     ]
   },
   {
@@ -67,13 +69,13 @@ const SERVICES = [
     image: "/images/clay-social-media.png",
     desc: "We help brands grow their presence, engagement, and reach across all major social platforms.",
     features: [
-      "Monthly Management",
-      "Static Post Design",
-      "Reels Creation & Editing",
-      "Story Management",
+      "Monthly Management & Strategy",
+      "Static Post & Story Design",
+      "Reels Creation & Short Video Editing",
       "Caption & Hashtag Research",
-      "Content Strategy",
-      "Performance Reports"
+      "Competitor Analysis & Reports",
+      "Dedicated Social Growth Manager",
+      "Meta Ad Campaign Setup Assistance"
     ]
   },
   {
@@ -87,7 +89,9 @@ const SERVICES = [
       "Caption & Script Writing",
       "Thumbnail Design",
       "Content Repurposing",
-      "Professional Color Grading"
+      "Professional Color Grading",
+      "Sound FX & Trending Audio Matching",
+      "Hook & Engagement Optimization"
     ]
   },
   {
@@ -111,10 +115,12 @@ const SERVICES = [
     image: "/images/clay-graphic-design.png",
     desc: "Custom brand design collateral, visual logo systems, and digital assets designed to make your brand memorable.",
     features: [
-      "Logo Design",
-      "Social Media Post Design",
-      "Visiting Card Design",
-      "Brochure & Print Design"
+      "Logo & Brand Visual Systems",
+      "Social Media Visual Assets",
+      "Visiting Cards & Stationeries",
+      "Brochure, Flyer & Print Design",
+      "Custom Visual Illustration Packs",
+      "Pitch Decks & Presentation Templates"
     ]
   },
   {
@@ -126,7 +132,9 @@ const SERVICES = [
     features: [
       "Website + Social Media Bundle",
       "Full Growth Acceleration Package",
-      "Integrated Digital Strategy"
+      "Integrated Brand Strategy",
+      "Monthly Marketing Strategy Audits",
+      "Conversion Funnel Optimization"
     ]
   }
 ];
@@ -262,33 +270,45 @@ function ServiceCard({ s, isExpanded, isMobile, onHover }) {
               ))}
             </ul>
           </div>
+
+          {!isExpanded && (
+            <ul className="list-none p-0 mt-3 flex flex-col gap-1 w-full opacity-90">
+              {s.features.slice(0, 3).map((f, i) => (
+                <li
+                  key={i}
+                  className="flex items-center gap-1.5 text-[11px] font-semibold text-[#1C0F0A]/70 truncate"
+                >
+                  <span className="text-[#C4501A] font-bold text-sm leading-none">•</span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Right Column: Styled Preview Box (for expanded cards on desktop) */}
         {!isMobile && isExpanded && s.image && (
-          <div className="w-[42%] h-full flex items-center justify-center pl-2">
-            <div className="bg-[#1C0F0A]/[0.03] border border-[#1C0F0A]/[0.06] rounded-[20px] w-full h-[240px] md:h-full md:max-h-[260px] flex items-center justify-center overflow-hidden p-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.92, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full h-full flex items-center justify-center"
-              >
-                <motion.img
-                  src={s.image}
-                  alt={s.title}
-                  className="max-w-[95%] max-h-[160px] object-contain mix-blend-multiply filter drop-shadow-[0_8px_24px_rgba(28,15,10,0.08)]"
-                  animate={{
-                    y: [0, -10, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </motion.div>
-            </div>
+          <div className="w-[42%] h-full flex items-center justify-center pl-2 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full h-full flex items-center justify-center"
+            >
+              <motion.img
+                src={s.image}
+                alt={s.title}
+                className="max-w-[100%] max-h-[220px] object-contain mix-blend-multiply filter drop-shadow-[0_12px_32px_rgba(28,15,10,0.12)]"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </motion.div>
           </div>
         )}
       </div>
