@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Particles } from "@/components/ui/particles";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -227,10 +228,10 @@ function ModelCard({ model }) {
       }}
       className={`relative rounded-[24px] border p-8 flex flex-col h-full justify-between transition-all duration-500 ease-in-out cursor-pointer
         ${model.featured 
-          ? "border-[#C4501A] bg-[#F5EDE8] shadow-[0_30px_60px_rgba(28,15,10,0.12)] md:scale-[1.03]" 
-          : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] hover:border-[#C4501A]"
+          ? "border-[var(--terracotta)] bg-[var(--blush)] shadow-[0_30px_60px_rgba(0,0,0,0.12)] md:scale-[1.03]" 
+          : "border-[var(--blush-border)] bg-[var(--sand)] shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:border-[var(--terracotta)]"
         }
-        ${hovered ? "shadow-[0_30px_60px_rgba(28,15,10,0.15)] -translate-y-2 border-[#C4501A]" : ""}
+        ${hovered ? "shadow-[0_30px_60px_rgba(0,0,0,0.15)] -translate-y-2 border-[var(--terracotta)]" : ""}
       `}
       style={{
         transition: "border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
@@ -239,34 +240,34 @@ function ModelCard({ model }) {
       <div className="flex flex-col items-start w-full">
         {/* Badge */}
         {model.badge && (
-          <span className="text-[10px] font-bold tracking-wider uppercase text-white bg-[#C4501A] px-3 py-1 rounded-full mb-4 inline-block shadow-sm">
+          <span className="text-[10px] font-bold tracking-wider uppercase text-white bg-[var(--terracotta)] px-3 py-1 rounded-full mb-4 inline-block shadow-sm">
             {model.badge}
           </span>
         )}
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl font-bold text-[#1C0F0A] tracking-tight mb-3">
+        <h3 className="text-xl md:text-2xl font-bold text-[var(--ink)] tracking-tight mb-3">
           {model.title}
         </h3>
 
         {/* Illustration */}
         {model.image && (
-          <div className="w-full flex items-center justify-center py-4 mb-4 bg-[#1C0F0A]/[0.02] rounded-[16px] overflow-hidden">
+          <div className="w-full flex items-center justify-center py-4 mb-4 bg-[var(--ink)]/[0.02] rounded-[16px] overflow-hidden">
             <img
               src={model.image}
               alt={model.title}
-              className="max-h-[140px] object-contain mix-blend-multiply drop-shadow-[0_8px_24px_rgba(28,15,10,0.06)]"
+              className="max-h-[140px] object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
             />
           </div>
         )}
 
         {/* Description */}
-        <p className="text-sm text-[#1C0F0A]/60 leading-relaxed mb-6">
+        <p className="text-sm text-[var(--ink-60)] leading-relaxed mb-6">
           {model.desc}
         </p>
 
         {/* Divider */}
-        <div className="w-full h-[1px] bg-[#D9C8BF] mb-6" />
+        <div className="w-full h-[1px] bg-[var(--blush-border)] mb-6" />
 
         {/* Features List */}
         <ul className="list-none p-0 m-0 flex flex-col gap-3 w-full mb-8">
@@ -282,7 +283,7 @@ function ModelCard({ model }) {
                 duration: 0.5,
                 ease: [0.22, 1, 0.36, 1]
               }}
-              className="flex items-center gap-3 text-sm font-semibold text-[#1C0F0A]"
+              className="flex items-center gap-3 text-sm font-semibold text-[var(--ink)]"
             >
               <CheckCircle size={16} className="text-[#C4501A] shrink-0" />
               <span>{f}</span>
@@ -309,13 +310,39 @@ function ModelCard({ model }) {
 }
 
 export default function ServicesPage() {
+  const [particleColor, setParticleColor] = useState("#C4501A");
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      setParticleColor(isDark ? "#FAF5F2" : "#C4501A");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    setParticleColor(isDark ? "#FAF5F2" : "#C4501A");
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Navbar />
 
       {/* ═══ HERO ═══ */}
-      <section className="section section--sand section--first" id="services-hero" style={{ overflow: "hidden" }}>
-        <div className="container hero">
+      <section className="section section--sand section--first relative" id="services-hero" style={{ overflow: "hidden" }}>
+        <Particles
+          className="absolute inset-0 z-0 pointer-events-none"
+          quantity={80}
+          ease={80}
+          color={particleColor}
+          size={2.0}
+          refresh
+        />
+        <div className="container hero relative z-10">
           <motion.div
             className="hero-text"
             variants={staggerContainer}

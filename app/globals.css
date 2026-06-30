@@ -19,6 +19,7 @@
   --ink-60:         rgba(28,15,10,0.6);
   --ink-30:         rgba(28,15,10,0.3);
   --navbar-bg:      rgba(250, 245, 242, 0.85);
+  --card-dark-bg:   #1C0F0A; /* Dark ink in light mode */
 
   /* Typography Scale */
   --text-hero:   clamp(2.25rem, 5.25vw, 4.5rem);
@@ -39,14 +40,15 @@
 
 /* ── Dark Mode (optional) ───────────────────────────────── */
 [data-theme="dark"] {
-  --blush:        #1A1210;
-  --sand:         #0F0C0B;
-  --blush-deep:   #1E1714;
-  --blush-border: #3A2E28;
-  --ink:          #F5EDE8;
-  --ink-60:       rgba(245,237,232,0.6);
-  --ink-30:       rgba(245,237,232,0.3);
-  --navbar-bg:    rgba(15, 12, 11, 0.85);
+  --blush:        #1F1411; /* Warm dark cocoa card */
+  --sand:         #130A08; /* Earthy warm cocoa background */
+  --blush-deep:   #0C0605; /* Deep warm black border */
+  --blush-border: #3A2A23; /* Earthy warm clay border */
+  --ink:          #F7ECE6; /* Linen warm white text */
+  --ink-60:       rgba(247, 236, 230, 0.7);
+  --ink-30:       rgba(247, 236, 230, 0.3);
+  --navbar-bg:    rgba(19, 10, 8, 0.85);
+  --card-dark-bg: #0C0605; /* Custom deep dark cocoa step card */
 }
 
 /* ── Reset & Base ───────────────────────────────────────── */
@@ -81,6 +83,29 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth global theme transitions */
+body,
+.navbar,
+.navbar-inner,
+.navbar-link,
+.footer,
+.section,
+.card,
+.service-card,
+.clay-card,
+.tech-badge,
+.logo-marquee,
+h1, h2, h3, h4, h5, h6,
+p, span, a, button, svg, input, textarea {
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Subtle noise texture overlay */
@@ -203,15 +228,18 @@ ul, ol {
   padding-top: 1.5rem;
 }
 
-/* High-performance GPU-optimized transition for services flex grid cards */
+/* High-performance GPU-optimized transition for services flex grid cards and inner layout shifts */
 .smooth-expand {
   transition: flex-grow 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
               flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.3s ease, 
               border-color 0.3s ease, 
               box-shadow 0.4s ease;
-  will-change: flex-grow, flex-basis;
+  will-change: flex-grow, flex-basis, width, opacity, max-height;
 }
 
 .section--sand {
@@ -1664,13 +1692,17 @@ ul, ol {
 }
 
 .tech-badge {
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
   border-radius: 999px;
   background: var(--blush-deep);
   border: 1px solid var(--blush-border);
-  font-family: var(--font-mono), 'DM Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--ink-60);
   transition: all 0.25s ease;
 }
@@ -1679,6 +1711,7 @@ ul, ol {
   border-color: var(--terracotta);
   color: var(--terracotta);
   background: rgba(196,80,26,0.06);
+  transform: translateY(-2px);
 }
 
 /* ── Responsive 3D scene ────────────────────────────────── */

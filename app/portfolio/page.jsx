@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Particles } from "@/components/ui/particles";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
@@ -48,6 +49,23 @@ const fadeInUp = {
 
 export default function PortfolioPage() {
   const [active, setActive] = useState("All");
+  const [particleColor, setParticleColor] = useState("#C4501A");
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      setParticleColor(isDark ? "#FAF5F2" : "#C4501A");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    setParticleColor(isDark ? "#FAF5F2" : "#C4501A");
+
+    return () => observer.disconnect();
+  }, []);
 
   const filtered = active === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === active);
 
@@ -56,8 +74,16 @@ export default function PortfolioPage() {
       <Navbar />
 
       {/* ═══ HERO ═══ */}
-      <section className="section section--sand section--first" id="portfolio-hero" style={{ overflow: "hidden" }}>
-        <div className="container hero">
+      <section className="section section--sand section--first relative" id="portfolio-hero" style={{ overflow: "hidden" }}>
+        <Particles
+          className="absolute inset-0 z-0 pointer-events-none"
+          quantity={80}
+          ease={80}
+          color={particleColor}
+          size={2.0}
+          refresh
+        />
+        <div className="container hero relative z-10">
           <motion.div
             className="hero-text"
             variants={staggerContainer}

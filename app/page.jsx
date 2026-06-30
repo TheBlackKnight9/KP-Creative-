@@ -31,6 +31,7 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CreativeHeading from "@/components/CreativeHeading";
 import { ImagesBadge } from "@/components/ui/images-badge";
+import { Particles } from "@/components/ui/particles";
 
 const SERVICES = [
   {
@@ -164,6 +165,72 @@ const FAQS = [
   { q: "Can you redesign my existing website?", a: "Yes! Many of our projects are redesigns. We audit your current site, identify what's working, and build a new experience that preserves what's good while fixing what isn't." },
 ];
 
+const TECH_ICONS = {
+  "Next.js": (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.02 15.42L7.33 12.3h2.36l2.36 3.12h.06v-3.12h1.8v5.12h-1.39l-3.23-4.22h-.06v4.22h-1.8zm5.77 0V12.3h1.8v5.12h-1.8z" />
+    </svg>
+  ),
+  React: (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <ellipse cx="12" cy="12" rx="10" ry="4" />
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+    </svg>
+  ),
+  GSAP: (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+  ),
+  "Three.js": (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+    </svg>
+  ),
+  Figma: (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8.5 12a3.5 3.5 0 1 1 0-7H12v7H8.5zm0-7A3.5 3.5 0 0 0 5 8.5C5 10.43 6.57 12 8.5 12H12V5H8.5zM15.5 12a3.5 3.5 0 0 1 3.5 3.5c0 1.93-1.57 3.5-3.5 3.5H12v-7h3.5zm-3.5 0h3.5a3.5 3.5 0 0 0 3.5-3.5C19 6.57 17.43 5 15.5 5H12v7zm0 0v7h3.5a3.5 3.5 0 1 0 0-7H12z" />
+    </svg>
+  ),
+  "Framer Motion": (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0l12 12h-12l-12-12h24zm0 24l-12-12h12l12 12h-24z" />
+    </svg>
+  ),
+  "Node.js": (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2L3.5 7v10L12 22l8.5-5V7L12 2zm-1 15.5l-4-2.3v-4.4l4 2.3v4.4zm5.5-3.2l-4 2.3v-4.4l4-2.3v4.4z" />
+    </svg>
+  ),
+  Vercel: (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2L2 22h20L12 2z" />
+    </svg>
+  ),
+  Shopify: (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zM3 6h18M16 10a4 4 0 0 1-8 0" />
+    </svg>
+  ),
+  WordPress: (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm8.67 6.13c.27.67.43 1.39.43 2.15 0 2.22-1.07 4.19-2.73 5.43l-3.32-9.61c3.15.53 5.12 1.25 5.62 2.03zM12 3.75c1.47 0 2.82.41 3.98 1.11l-2.42 7.02L11 6.54c.73-.08 1.4-.13 1.4-.13.38-.03.35-.61-.03-.58 0 0-1.28.1-2.11.1-.8 0-2.08-.1-2.08-.1-.38-.03-.41.55-.03.58 0 0 .54.05.9.1l2.58 7.21-2.58 7.74L5 6.64c.36-.05.9-.1.9-.1.38-.03.35-.61-.03-.58 0 0-1.28.1-2.11.1-.64 0-1.63-.07-1.92-.09C3.65 4.38 7.55 3.75 12 3.75zm-6.2 9.07l2.84 8.24A8.204 8.204 0 0 1 3.8 12c0-1.12.21-2.19.59-3.18zm8.01 7.84L10.02 9.17l3.79 11.49z" />
+    </svg>
+  ),
+  "Google Analytics": (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M18 20V10M12 20V4M6 20v-6" />
+    </svg>
+  ),
+  "Meta Ads": (
+    <svg className="w-5 h-5 text-[#C4501A] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.14 7.64c-.94-.85-2.22-1.32-3.53-1.32-1.74 0-3.33.84-4.22 2.25l-.2.32-.2-.32C10.1 7.16 8.51 6.32 6.77 6.32c-1.31 0-2.59.47-3.53 1.32C1.35 9.34.25 11.75.25 14.33c0 2.58 1.1 4.99 2.99 6.69.94.85 2.22 1.32 3.53 1.32 1.74 0 3.33-.84 4.22-2.25l.2-.32.2.32c.89 1.41 2.48 2.25 4.22 2.25 1.31 0 2.59-.47 3.53-1.32 1.89-1.7 2.99-4.11 2.99-6.69 0-2.58-1.1-4.99-2.99-6.69zm-12.37 11c-1.92 0-3.48-1.57-3.48-3.5 0-1.93 1.56-3.5 3.48-3.5s3.48 1.57 3.48 3.5c0 1.93-1.56 3.5-3.48 3.5zm8.85 0c-1.92 0-3.48-1.57-3.48-3.5 0-1.93 1.56-3.5 3.48-3.5s3.48 1.57 3.48 3.5c0 1.93-1.56 3.5-3.48 3.5z" />
+    </svg>
+  ),
+};
+
 const TECH_STACK = [
   "Next.js", "React", "GSAP", "Three.js", "Figma", "Framer Motion",
   "Node.js", "Vercel", "Shopify", "WordPress", "Google Analytics", "Meta Ads",
@@ -213,16 +280,16 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
     <div
       onMouseEnter={onHover}
       onFocus={onHover}
-      className={`relative overflow-hidden rounded-[20px] border smooth-expand w-full h-full cursor-pointer flex
+      className={`relative overflow-hidden rounded-[20px] border smooth-expand w-full h-full cursor-pointer flex p-6 md:p-7
         ${isExpanded 
-          ? "border-[#C4501A]/50 bg-[#F5EDE8] shadow-[0_22px_48px_rgba(28,15,10,0.12)] py-6 px-8" 
-          : "border-[#D9C8BF] bg-[#FAF5F2] shadow-[0_2px_16px_rgba(28,15,10,0.06)] py-5 px-6 hover:border-[#C4501A]/30"
+          ? "border-[var(--terracotta)]/50 bg-[var(--blush)] shadow-[0_22px_48px_rgba(0,0,0,0.12)]" 
+          : "border-[var(--blush-border)] bg-[var(--sand)] shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:border-[var(--terracotta)]/30"
         }`}
     >
-      <div className={`flex w-full h-full ${isExpanded && !isMobile ? "flex-row justify-between items-center gap-6" : "flex-col justify-between items-start"}`}>
+      <div className="flex w-full h-full flex-row justify-between items-center gap-6">
         
         {/* Left Column: Text Content */}
-        <div className={`flex flex-col items-start smooth-expand ${isExpanded && !isMobile ? "w-[58%]" : "w-full"}`}>
+        <div className={`flex flex-col items-start smooth-expand shrink-0 ${isExpanded && !isMobile ? "w-[58%]" : "w-full"}`}>
           {/* Icon */}
           <div
             className={`flex items-center justify-center rounded-[14px] text-[#C4501A] smooth-expand
@@ -242,84 +309,59 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
 
           {/* Title */}
           <h3
-            className={`font-bold tracking-tight text-[#1C0F0A] smooth-expand leading-tight
+            className={`font-bold tracking-tight text-[var(--ink)] smooth-expand leading-tight
               ${isExpanded ? "text-2xl mb-2" : "text-[16px] md:text-[18px] mb-0"}`}
           >
             {s.title}
           </h3>
 
-          {/* Description & List (Expand/Collapse with hardware-accelerated height animation) */}
-          <AnimatePresence initial={false}>
-            {isExpanded && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full overflow-hidden mt-2"
-              >
-                {s.desc && (
-                  <p className="text-sm text-[#1C0F0A]/60 leading-relaxed mb-4">
-                    {s.desc}
-                  </p>
-                )}
-
-                <ul className="list-none p-0 m-0 flex flex-col gap-2">
-                  {s.features.map((f, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-2 text-xs font-semibold text-[#1C0F0A]"
-                    >
-                      <span className="text-[#C4501A] font-bold text-sm leading-none">•</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+          {/* Description Paragraph (Always in DOM, height transitioned smoothly) */}
+          <div
+            className={`smooth-expand overflow-hidden w-full
+              ${isExpanded ? "opacity-100 max-h-24 mt-2" : "opacity-0 max-h-0 pointer-events-none mt-0"}`}
+          >
+            {s.desc && (
+              <p className="text-sm text-[var(--ink-60)] leading-relaxed">
+                {s.desc}
+              </p>
             )}
-          </AnimatePresence>
+          </div>
 
-          {!isExpanded && (
-            <ul className="list-none p-0 mt-3 flex flex-col gap-1 w-full opacity-90">
-              {s.features.slice(0, isRowActive ? 5 : 3).map((f, i) => (
+          {/* Features List (Single stable list: extra items transition max-height and opacity) */}
+          <ul className="list-none p-0 mt-3 flex flex-col gap-2 w-full">
+            {s.features.map((f, i) => {
+              const isExtra = i >= (isRowActive ? 5 : 3);
+              return (
                 <li
                   key={i}
-                  className="flex items-center gap-1.5 text-[11px] font-semibold text-[#1C0F0A]/70 truncate"
+                  className={`flex items-center gap-2 text-xs font-semibold text-[var(--ink)] smooth-expand
+                    ${isExtra && !isExpanded 
+                      ? "opacity-0 max-h-0 overflow-hidden pointer-events-none mt-0 py-0" 
+                      : "opacity-100 max-h-8 py-0.5"}`}
                 >
                   <span className="text-[#C4501A] font-bold text-sm leading-none">•</span>
-                  <span>{f}</span>
+                  <span className="truncate">{f}</span>
                 </li>
-              ))}
-            </ul>
-          )}
+              );
+            })}
+          </ul>
         </div>
 
-        {/* Right Column: Styled Preview Box (for expanded cards on desktop with smooth fade in/out) */}
-        <AnimatePresence>
-          {!isMobile && isExpanded && s.image && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.9, x: 20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="w-[42%] h-full flex items-center justify-center pl-2 overflow-hidden shrink-0"
-            >
-              <motion.img
-                src={s.image}
-                alt={s.title}
-                className="max-w-[100%] max-h-[220px] object-contain mix-blend-multiply filter drop-shadow-[0_12px_32px_rgba(28,15,10,0.12)]"
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Right Column: Styled Preview Box (always in DOM on desktop to prevent mounting delays) */}
+        {!isMobile && (
+          <div
+            className={`smooth-expand flex items-center justify-center pl-2 overflow-hidden shrink-0
+              ${isExpanded ? "w-[42%] opacity-100" : "w-0 opacity-0 pointer-events-none"}`}
+          >
+            <img
+              src={s.image}
+              alt={s.title}
+              className={`max-w-[100%] max-h-[220px] object-contain mix-blend-multiply filter drop-shadow-[0_12px_32px_rgba(28,15,10,0.12)] transition-all duration-500
+                ${isExpanded ? "scale-100 rotate-0" : "scale-90 rotate-2"}`}
+            />
+          </div>
+        )}
+
       </div>
     </div>
   );
@@ -328,7 +370,24 @@ function ServiceCard({ s, isExpanded, isMobile, onHover, isRowActive }) {
 export default function HomePage() {
   const [activeId, setActiveId] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [particleColor, setParticleColor] = useState("#C4501A");
 
+  useEffect(() => {
+    // Sync particle color to active theme state (MutationObserver captures custom data-theme switch)
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      setParticleColor(isDark ? "#FAF5F2" : "#C4501A");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    setParticleColor(isDark ? "#FAF5F2" : "#C4501A");
+
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
     setIsMobile(mql.matches);
@@ -363,8 +422,16 @@ export default function HomePage() {
       <Navbar />
 
       {/* ═══ HERO ═══ */}
-      <section className="section section--sand section--first" id="hero" style={{ overflow: "hidden" }}>
-        <div className="container hero">
+      <section className="section section--sand section--first relative" id="hero" style={{ overflow: "hidden" }}>
+        <Particles
+          className="absolute inset-0 z-0 pointer-events-none"
+          quantity={80}
+          ease={80}
+          color={particleColor}
+          size={2.0}
+          refresh
+        />
+        <div className="container hero relative z-10">
           {/* Left – Text */}
           <motion.div
             className="hero-text"
@@ -494,29 +561,29 @@ export default function HomePage() {
                 let iconClass = "";
 
                 if (idx === 0) {
-                  bgClass = "bg-[#C4501A] shadow-[0_12px_32px_rgba(196,80,26,0.15)]";
+                  bgClass = "bg-[var(--terracotta)] shadow-[0_12px_32px_rgba(0,0,0,0.15)]";
                   textClass = "text-white";
                   descClass = "text-white/80";
-                  bubbleClass = "bg-[#FAF5F2] shadow-[inset_-3px_-3px_8px_rgba(28,15,10,0.04),_0_8px_16px_rgba(0,0,0,0.1)]";
-                  iconClass = "text-[#C4501A]";
+                  bubbleClass = "bg-[var(--sand)] shadow-[inset_-3px_-3px_8px_rgba(0,0,0,0.04),_0_8px_16px_rgba(0,0,0,0.1)]";
+                  iconClass = "text-[var(--terracotta)]";
                 } else if (idx === 1) {
-                  bgClass = "bg-[#F5EDE8] border border-[#D9C8BF]/30 shadow-[0_12px_32px_rgba(28,15,10,0.04)]";
-                  textClass = "text-[#1C0F0A]";
-                  descClass = "text-[#1C0F0A]/60";
-                  bubbleClass = "bg-[#C4501A] shadow-[0_8px_16px_rgba(196,80,26,0.15)]";
+                  bgClass = "bg-[var(--blush)] border border-[var(--blush-border)]/30 shadow-[0_12px_32px_rgba(0,0,0,0.04)]";
+                  textClass = "text-[var(--ink)]";
+                  descClass = "text-[var(--ink-60)]";
+                  bubbleClass = "bg-[var(--terracotta)] shadow-[0_8px_16px_rgba(196,80,26,0.15)]";
                   iconClass = "text-white";
                 } else if (idx === 2) {
-                  bgClass = "bg-[#1C0F0A] shadow-[0_12px_32px_rgba(28,15,10,0.2)]";
+                  bgClass = "bg-[var(--card-dark-bg)] shadow-[0_12px_32px_rgba(0,0,0,0.2)]";
                   textClass = "text-white";
                   descClass = "text-white/70";
-                  bubbleClass = "bg-[#C4501A] shadow-[0_8px_16px_rgba(196,80,26,0.15)]";
+                  bubbleClass = "bg-[var(--terracotta)] shadow-[0_8px_16px_rgba(196,80,26,0.15)]";
                   iconClass = "text-white";
                 } else {
-                  bgClass = "bg-[#C4501A] shadow-[0_12px_32px_rgba(196,80,26,0.15)]";
+                  bgClass = "bg-[var(--terracotta)] shadow-[0_12px_32px_rgba(0,0,0,0.15)]";
                   textClass = "text-white";
                   descClass = "text-white/80";
-                  bubbleClass = "bg-[#FAF5F2] shadow-[inset_-3px_-3px_8px_rgba(28,15,10,0.04),_0_8px_16px_rgba(0,0,0,0.1)]";
-                  iconClass = "text-[#C4501A]";
+                  bubbleClass = "bg-[var(--sand)] shadow-[inset_-3px_-3px_8px_rgba(0,0,0,0.04),_0_8px_16px_rgba(0,0,0,0.1)]";
+                  iconClass = "text-[var(--terracotta)]";
                 }
 
                 return (
@@ -547,15 +614,15 @@ export default function HomePage() {
                       ) : (
                         /* Step Number Indicator (Left Card Row) - hidden on mobile */
                         <div className="hidden md:flex flex-col items-end pr-10">
-                          <span className="font-display text-5xl font-extrabold text-[#C4501A]/35 tracking-tight">{`STEP ${step.num}`}</span>
-                          <span className="text-[10px] font-bold tracking-widest text-[#1C0F0A]/40 uppercase mt-1">Our Process</span>
+                          <span className="font-display text-5xl font-extrabold text-[var(--terracotta)]/35 tracking-tight">{`STEP ${step.num}`}</span>
+                          <span className="text-[10px] font-bold tracking-widest text-[var(--ink-30)]/40 uppercase mt-1">Our Process</span>
                         </div>
                       )}
                     </div>
 
                     {/* MIDDLE COLUMN (Timeline dot/ring - matches SVG path crossing) */}
                     <div className="absolute left-6 top-[28px] md:top-1/2 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:static md:translate-y-0 flex items-center justify-center h-full order-1 md:order-2 z-10">
-                      <div className="w-5 h-5 rounded-full bg-[#FAF5F2] border-4 border-[#C4501A] shadow-sm" />
+                      <div className="w-5 h-5 rounded-full bg-[var(--sand)] border-4 border-[var(--terracotta)] shadow-sm" />
                     </div>
 
                     {/* RIGHT COLUMN */}
@@ -563,8 +630,8 @@ export default function HomePage() {
                       {isLeft ? (
                         /* Step Number Indicator (Right Card Row) - hidden on mobile */
                         <div className="hidden md:flex flex-col items-start pl-10">
-                          <span className="font-display text-5xl font-extrabold text-[#C4501A]/35 tracking-tight">{`STEP ${step.num}`}</span>
-                          <span className="text-[10px] font-bold tracking-widest text-[#1C0F0A]/40 uppercase mt-1">Our Process</span>
+                          <span className="font-display text-5xl font-extrabold text-[var(--terracotta)]/35 tracking-tight">{`STEP ${step.num}`}</span>
+                          <span className="text-[10px] font-bold tracking-widest text-[var(--ink-30)]/40 uppercase mt-1">Our Process</span>
                         </div>
                       ) : (
                         /* Right Card: bubble is on the left next to central line on desktop, and next to left line on mobile */
@@ -614,7 +681,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="w-full flex flex-col gap-6 md:h-[720px] overflow-hidden">
+          <div className="w-full flex flex-col gap-6 md:h-[760px] pb-6 overflow-visible">
             {/* Top Row: 2 cards */}
             <div
               className="flex flex-col md:flex-row gap-6 w-full smooth-expand flex-nowrap"
@@ -750,8 +817,16 @@ export default function HomePage() {
       </section>
 
       {/* ═══ WHY US ═══ */}
-      <section className="section section--sand" id="why-us">
-        <div className="container">
+      <section className="section section--sand relative" id="why-us" style={{ overflow: "hidden" }}>
+        <Particles
+          className="absolute inset-0 z-0 pointer-events-none"
+          quantity={60}
+          ease={80}
+          color={particleColor}
+          size={2.0}
+          refresh
+        />
+        <div className="container relative z-10">
           <div className="section-header">
             <TagPill>Why KP Creatives</TagPill>
             <div style={{ marginTop: "0.5rem" }}>
@@ -808,7 +883,7 @@ export default function HomePage() {
                         hoverSpread={45}
                       />
                     </div>
-                    <p className="text-xs md:text-sm leading-relaxed text-[#1C0F0A]/60 mt-4 px-4">
+                    <p className="text-xs md:text-sm leading-relaxed text-[var(--ink-60)] mt-4 px-4">
                       {item.desc}
                     </p>
                   </div>
@@ -837,7 +912,10 @@ export default function HomePage() {
           </div>
           <div className="tech-badges" style={{ justifyContent: "center" }}>
             {TECH_STACK.map((t) => (
-              <span className="tech-badge" key={t}>{t}</span>
+              <span className="tech-badge" key={t}>
+                {TECH_ICONS[t] || null}
+                <span>{t}</span>
+              </span>
             ))}
           </div>
         </div>

@@ -33,7 +33,7 @@ export function ImagesBadge({
       onMouseLeave={() => setIsActive(false)}
       // Mobile: tap to toggle
       onTouchStart={handleToggle}
-      className={`inline-flex items-center gap-3 bg-[#FAF5F2] border border-[#D9C8BF]/60 rounded-full px-4 py-2 shadow-[0_2px_12px_rgba(28,15,10,0.04)] transition-colors duration-200 cursor-pointer select-none relative touch-manipulation ${isActive ? "bg-[#F5EDE8] shadow-[0_8px_24px_rgba(28,15,10,0.08)]" : ""} ${className}`}
+      className={`inline-flex items-center gap-3 bg-[var(--sand)] border border-[var(--blush-border)]/60 rounded-full px-4 py-2 shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-colors duration-200 cursor-pointer select-none relative touch-manipulation ${isActive ? "bg-[var(--blush)] shadow-[0_8px_24px_rgba(0,0,0,0.08)]" : ""} ${className}`}
     >
       {/* Folder/Thumbnail area */}
       <div
@@ -65,7 +65,7 @@ export function ImagesBadge({
           return (
             <motion.div
               key={idx}
-              className="absolute rounded-md overflow-hidden border border-white/80 shadow-[0_2px_8px_rgba(28,15,10,0.12)] bg-neutral-100 shrink-0"
+              className="absolute rounded-md overflow-hidden border border-[var(--blush-border)]/80 shadow-[0_2px_8px_rgba(0,0,0,0.12)] bg-neutral-100 shrink-0"
               style={{ zIndex, willChange: "transform" }}
               animate={{
                 width: isActive ? hoverImageSize.width : teaserImageSize.width,
@@ -96,7 +96,7 @@ export function ImagesBadge({
       </div>
 
       {/* Text label */}
-      <span className="text-xs md:text-sm font-bold tracking-tight text-[#1C0F0A]">
+      <span className="text-xs md:text-sm font-bold tracking-tight text-[var(--ink)]">
         {text}
       </span>
     </div>
