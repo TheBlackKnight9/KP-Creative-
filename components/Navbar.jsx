@@ -114,7 +114,7 @@ export default function Navbar() {
     // Read theme state on mount to sync React state with document attribute set by head script
     const activeTheme = document.documentElement.getAttribute("data-theme") || 
                         localStorage.getItem("theme") || 
-                        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+                        "light";
     
     setDarkMode(activeTheme === "dark");
     setMounted(true);
