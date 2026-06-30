@@ -681,7 +681,16 @@ ul, ol {
   border: 1px solid var(--blush-border);
   border-radius: 999px;
   padding: 8px 0;
-  box-shadow: 0 8px 32px rgba(28, 15, 10, 0.08);
+}
+
+@media (max-width: 767px) {
+  .navbar.scrolled {
+    width: 92%;
+    top: 10px;
+  }
+  .navbar.scrolled .container {
+    padding-inline: 1rem;
+  }
 }
 
 .navbar-inner {
@@ -1719,5 +1728,54 @@ ul, ol {
   .scene-container {
     min-height: 300px;
     border-radius: 20px;
+  }
+}
+
+/* ── Industry Pills Marquee Styles ───────────────────────── */
+.industry-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  background: var(--sand-light, #FAF5F2);
+  border: 1px solid rgba(196, 80, 26, 0.15);
+  border-radius: 999px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: 0 4px 12px rgba(28, 15, 10, 0.04);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, border-color, box-shadow;
+}
+
+.industry-pill:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+  background: var(--sand-light, #FAF5F2);
+  box-shadow: 0 8px 24px rgba(196, 80, 26, 0.12);
+}
+
+.industry-pill-icon {
+  font-size: 1.1rem;
+}
+
+/* Tablet adjustments */
+@media (max-width: 991px) {
+  .industry-pill {
+    padding: 8px 20px;
+    font-size: 0.88rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .industry-pill {
+    padding: 7px 16px;
+    font-size: 0.8rem;
+    gap: 8px;
   }
 }

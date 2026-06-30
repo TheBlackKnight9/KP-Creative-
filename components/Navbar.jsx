@@ -45,7 +45,7 @@ function AnimatedThemeToggle({ darkMode, toggleTheme }) {
       className="relative w-[72px] h-9 rounded-full p-1 cursor-pointer flex items-center overflow-hidden border focus:outline-none shrink-0"
       onClick={toggleTheme}
       animate={{
-        backgroundColor: darkMode ? "#0C0605" : "#EDE0D8", // Deep cocoa backdrop vs blush-deep backdrop
+        backgroundColor: darkMode ? "#0C0605" : "#F5EDE8", // Deep cocoa backdrop vs blush sand backdrop
         borderColor: darkMode ? "#3A2A23" : "#D9C8BF"
       }}
       transition={{ duration: 0.4 }}
@@ -55,7 +55,7 @@ function AnimatedThemeToggle({ darkMode, toggleTheme }) {
     >
       {/* Sun Icon (Visible on the left in Light Mode, hidden/faded in Dark Mode) */}
       <motion.div
-        className="absolute left-2.5 flex items-center justify-center text-[var(--terracotta)]"
+        className="absolute left-2.5 inset-y-0 flex items-center justify-center text-[var(--terracotta)]"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: darkMode ? 0 : 1, scale: darkMode ? 0.6 : 1 }}
         transition={{ duration: 0.3 }}
@@ -68,7 +68,7 @@ function AnimatedThemeToggle({ darkMode, toggleTheme }) {
 
       {/* Moon Icon with Stars (Visible on the right in Dark Mode, hidden/faded in Light Mode) */}
       <motion.div
-        className="absolute right-2.5 flex items-center justify-center text-[var(--ink)]"
+        className="absolute right-2.5 inset-y-0 flex items-center justify-center text-[var(--ink)]"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: darkMode ? 1 : 0, scale: darkMode ? 1 : 0.6 }}
         transition={{ duration: 0.3 }}

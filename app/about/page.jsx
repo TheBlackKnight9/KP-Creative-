@@ -163,19 +163,15 @@ export default function AboutPage() {
               <ClayCard>
                 <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                   <div>
-                    <div className="stat-number">50+</div>
+                    <div className="stat-number">30+</div>
                     <div className="stat-label">Projects Delivered</div>
                   </div>
                   <div>
-                    <div className="stat-number">30+</div>
+                    <div className="stat-number">15+</div>
                     <div className="stat-label">Happy Clients</div>
                   </div>
                   <div>
-                    <div className="stat-number">6</div>
-                    <div className="stat-label">Team Members</div>
-                  </div>
-                  <div>
-                    <div className="stat-number">5+</div>
+                    <div className="stat-number">3</div>
                     <div className="stat-label">Years of Experience</div>
                   </div>
                 </div>

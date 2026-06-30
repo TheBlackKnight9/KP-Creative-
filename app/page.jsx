@@ -26,7 +26,8 @@ import Footer from "@/components/Footer";
 import TagPill from "@/components/TagPill";
 import ClayCard from "@/components/ClayCard";
 import ClayIllustration from "@/components/ClayIllustration";
-import LogoMarquee from "@/components/LogoMarquee";
+import IndustriesMarquee from "@/components/IndustriesMarquee";
+import TechMarquee from "@/components/TechMarquee";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CreativeHeading from "@/components/CreativeHeading";
@@ -501,13 +502,79 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ LOGO MARQUEE ═══ */}
-      <section className="section--blush" style={{ paddingBlock: "1.5rem" }} id="logos">
+      {/* ═══ INDUSTRIES WE SERVE ═══ */}
+      <section className="section section--sand" id="industries" style={{ overflow: "hidden" }}>
         <div className="container">
-          <p className="text-label text-center" style={{ color: "var(--ink-30)", marginBottom: "0.75rem" }}>
-            Trusted by forward-thinking brands
-          </p>
-          <LogoMarquee />
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                }
+              }
+            }}
+            className="section-header"
+            style={{ textAlign: "center", maxWidth: "680px", margin: "0 auto 3rem auto" }}
+          >
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+                }
+              }}
+            >
+              <TagPill>Industries We Serve</TagPill>
+            </motion.div>
+
+            <motion.div
+              style={{ marginTop: "0.75rem" }}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
+                }
+              }}
+            >
+              <CreativeHeading
+                text="Helping Businesses Across Industries"
+                highlight="Across Industries"
+                className="text-h1"
+              />
+            </motion.div>
+
+            <motion.p
+              className="text-body"
+              style={{ marginTop: "1.25rem", color: "var(--ink-60)" }}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }
+                }
+              }}
+            >
+              From ambitious startups to established local businesses, we create digital experiences that help brands grow, build trust, and attract more customers.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          >
+            <IndustriesMarquee />
+          </motion.div>
         </div>
       </section>
 
@@ -901,8 +968,8 @@ export default function HomePage() {
             <TagPill>Our Stack</TagPill>
             <div style={{ marginTop: "0.5rem" }}>
               <CreativeHeading
-                text="Tools We Love"
-                highlight="Love"
+                text="Tools We Use"
+                highlight="Use"
                 className="text-h2"
               />
             </div>
@@ -910,14 +977,7 @@ export default function HomePage() {
               We use the same modern tools that power the world&apos;s best digital experiences.
             </p>
           </div>
-          <div className="tech-badges" style={{ justifyContent: "center" }}>
-            {TECH_STACK.map((t) => (
-              <span className="tech-badge" key={t}>
-                {TECH_ICONS[t] || null}
-                <span>{t}</span>
-              </span>
-            ))}
-          </div>
+          <TechMarquee />
         </div>
       </section>
 
